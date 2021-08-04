@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import styles from "./App.module.css";
+import SinglePortfolio from "./SinglePortfolio";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Portfolio = ({ data }) => {
   if (data) {
@@ -25,17 +32,76 @@ const Portfolio = ({ data }) => {
     });
   }
 
+  let headlineRef = useRef();
+
+  useEffect(() => {
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#portfolio",
+        start: "top 80%",
+      },
+    });
+
+    tl.from(headlineRef, {
+      y: -100,
+      opacity: 0,
+    })
+      .from(
+        ".itemOne",
+        {
+          x: -200,
+          opacity: 0,
+        },
+        "-=0.5"
+      )
+      .from(
+        ".itemTwo",
+        {
+          x: 200,
+          opacity: 0,
+        },
+        "-=0.1"
+      )
+      .from(
+        ".itemThree",
+        {
+          x: -200,
+          opacity: 0,
+        },
+        "-=0.1"
+      );
+  }, []);
+
   return (
     <section id="portfolio">
       <div className="row">
         <div className="twelve columns collapsed">
-          <h1>Check Out Some of My Works.</h1>
+          <h1 className={styles.heading} ref={(el) => (headlineRef = el)}>
+            Check Out Some of My Works.
+          </h1>
 
           <div
             id="portfolio-wrapper"
             className="bgrid-quarters s-bgrid-thirds cf"
           >
-            {projects}
+            <SinglePortfolio
+              img="/images/portfolio/whatsapp.png"
+              title="Whatsapp Clone"
+              des="A fully functional clone of Whatsapp"
+              className="itemOne"
+            />
+            <SinglePortfolio
+              img="/images/portfolio/facebook.png"
+              title="Facebook Clone"
+              des="A fully functional clone of Facebook"
+              className="itemTwo"
+            />
+            <SinglePortfolio
+              img="/images/portfolio/amazon.png"
+              title="Amazon Clone"
+              des="A fully functional clone of Amazon"
+              className="itemThree"
+            />
           </div>
         </div>
       </div>

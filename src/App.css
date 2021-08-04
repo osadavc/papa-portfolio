@@ -1,5 +1,43 @@
+body {
+  overflow-x: hidden;
+}
+
 .submit {
   background-color: black;
-  border-radius: 5px;
+  border-radius: 10px !important;
   padding: 20px;
+  margin-top: 5px !important;
+}
+
+::selection {
+  color: #001a3a !important;
+  background: #98d2ff !important;
+}
+::-webkit-scrollbar {
+  width: 16px;
+  background-color: #fff;
+}
+::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
+}
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #555;
+}
+
+.heading {
+  font-family: "Quicksand", sans-serif !important;
+  text-transform: none;
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .submit {
+    width: 100% !important;
+  }
 }

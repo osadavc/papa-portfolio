@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./App.module.css";
 
 const Contact = ({ data }) => {
   const [name, setName] = useState("");
@@ -32,12 +33,8 @@ const Contact = ({ data }) => {
       <div className="row section-head">
         <div className="two columns header-col">
           <h1>
-            <span>Get In Touch.</span>
+            <span className="heading">Get In Touch.</span>
           </h1>
-        </div>
-
-        <div className="ten columns">
-          <p className="lead">{contactMessage}</p>
         </div>
       </div>
 
@@ -57,6 +54,7 @@ const Contact = ({ data }) => {
                   id="contactName"
                   name="contactName"
                   onChange={(e) => setName(e.target.value)}
+                  className={styles.formInput}
                 />
               </div>
 
@@ -72,6 +70,7 @@ const Contact = ({ data }) => {
                   id="contactEmail"
                   name="contactEmail"
                   onChange={(e) => setEmail(e.target.value)}
+                  className={styles.formInput}
                 />
               </div>
 
@@ -85,6 +84,7 @@ const Contact = ({ data }) => {
                   id="contactSubject"
                   name="contactSubject"
                   onChange={(e) => setSubject(e.target.value)}
+                  className={styles.formInput}
                 />
               </div>
 
@@ -99,11 +99,12 @@ const Contact = ({ data }) => {
                   onChange={(e) => setMessage(e.target.value)}
                   id="contactMessage"
                   name="contactMessage"
+                  className={styles.formInput}
                 ></textarea>
               </div>
 
               <div>
-                <button onClick={submitForm} type="submit" className="submit">
+                <button onClick={submitForm} type="submit" className="submit ">
                   Submit
                 </button>
               </div>

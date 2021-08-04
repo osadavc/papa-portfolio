@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import gsap from "gsap";
 import TypeWriter from "react-typewriter";
 
 const Header = ({ data }) => {
+  useEffect(() => {
+    gsap.from(".responsive-headline", {
+      opacity: 0,
+      duration: 1,
+    });
+    gsap.from(".headline", {
+      opacity: 0,
+      y: 20,
+    });
+    gsap.from(".socialIcons", {
+      opacity: 0,
+      x: -10,
+      stagger: 0.25,
+    });
+  }, []);
+
   if (data) {
     var name = data.name;
     var occupation = data.occupation;
@@ -9,9 +26,9 @@ const Header = ({ data }) => {
     var city = data.address.city;
     var networks = data.social.map(function (network) {
       return (
-        <li key={network.name}>
+        <li key={network.name} className="socialIcons">
           <a href={network.url}>
-            <i className={network.className}></i>
+            <i className={`${network.className}`}></i>
           </a>
         </li>
       );
@@ -41,17 +58,12 @@ const Header = ({ data }) => {
           </li>
           <li>
             <a className="smoothscroll" href="#resume">
-              Resume
+              Skills
             </a>
           </li>
           <li>
             <a className="smoothscroll" href="#portfolio">
               Works
-            </a>
-          </li>
-          <li>
-            <a className="smoothscroll" href="#testimonials">
-              Testimonials
             </a>
           </li>
           <li>
@@ -65,10 +77,12 @@ const Header = ({ data }) => {
       <div className="row banner">
         <div className="banner-text">
           <h1 className="responsive-headline">
-            <TypeWriter typing={0.5}>{name ? `I'm ${name}.` : null}</TypeWriter>
+            <span>
+              I'm <TypeWriter typing={0.5}>{name && `${name}`}</TypeWriter>
+            </span>
           </h1>
-          <h3>
-            Based in {city}. <span>{occupation}</span>. {description}.
+          <h3 className="headline">
+            <span>{occupation}</span>. {description}.
           </h3>
           <hr />
           <ul className="social">{networks}</ul>
